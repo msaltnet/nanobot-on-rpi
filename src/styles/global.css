@@ -1,0 +1,81 @@
+@import url('https://fonts.googleapis.com/css2?family=Noto+Serif+KR:wght@400;600;700&family=Noto+Sans+KR:wght@400;500&family=JetBrains+Mono:wght@400;600&display=swap');
+
+/* ── CSS Custom Properties ── */
+:root {
+  --color-bg:           #faf7f0;
+  --color-bg-alt:       #f3ede0;
+  --color-surface:      #ffffff;
+  --color-border:       #e2d9c8;
+
+  --color-text:         #2c2416;
+  --color-text-muted:   #7a6a54;
+  --color-text-subtle:  #b0a090;
+
+  --color-accent:       #c97a2f;
+  --color-accent-light: #f0c88a;
+  --color-accent-dark:  #9a5a1e;
+
+  --color-chapter-num:  #d4a853;
+
+  --font-serif:   'Noto Serif KR', 'Georgia', serif;
+  --font-sans:    'Noto Sans KR', 'system-ui', sans-serif;
+  --font-mono:    'JetBrains Mono', 'Consolas', monospace;
+
+  --space-xs:  0.25rem;
+  --space-sm:  0.5rem;
+  --space-md:  1rem;
+  --space-lg:  2rem;
+  --space-xl:  4rem;
+
+  --content-width: 72ch;
+  --nav-height:    4rem;
+}
+
+@media (prefers-color-scheme: dark) {
+  :root {
+    --color-bg:           #1a1610;
+    --color-bg-alt:       #231e17;
+    --color-surface:      #2a2218;
+    --color-border:       #3d3428;
+    --color-text:         #ede5d4;
+    --color-text-muted:   #a0907c;
+    --color-text-subtle:  #6a5a48;
+    --color-accent:       #e8973c;
+    --color-accent-light: #f0c88a;
+    --color-chapter-num:  #d4a853;
+  }
+}
+
+/* ── Reset & Base ── */
+*, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+html {
+  scroll-behavior: smooth;
+  -webkit-text-size-adjust: 100%;
+}
+
+body {
+  background-color: var(--color-bg);
+  color: var(--color-text);
+  font-family: var(--font-sans);
+  font-size: 1.0625rem;
+  line-height: 1.8;
+  min-height: 100dvh;
+}
+
+a {
+  color: var(--color-accent-dark);
+  text-decoration: underline;
+  text-decoration-color: var(--color-accent-light);
+  text-underline-offset: 3px;
+  transition: color 0.15s ease;
+}
+a:hover { color: var(--color-accent); }
+
+img { max-width: 100%; height: auto; display: block; }
+
+/* ── Layout Utilities ── */
+.container {
+  width: min(var(--content-width), 100% - 2 * var(--space-lg));
+  margin-inline: auto;
+}

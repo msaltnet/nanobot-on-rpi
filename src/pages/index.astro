@@ -1,0 +1,57 @@
+---
+import { getCollection } from 'astro:content';
+import BaseLayout from '../layouts/BaseLayout.astro';
+import TableOfContents from '../components/TableOfContents.astro';
+
+const allChapters = await getCollection('chapters', ({ data }) => !data.draft);
+---
+<BaseLayout title="홈">
+  <div class="container">
+    <section class="hero">
+      <div class="hero-ornament">✦</div>
+      <h1 class="hero-title">nanobot on rpi</h1>
+      <p class="hero-tagline">
+        신발 상자 속 라즈베리 파이에<br />개인비서를 올리는 이야기
+      </p>
+      <p class="hero-desc">
+        A-Z 방법과 노하우, 그리고 시행착오를 기록하는 일기장입니다.
+      </p>
+    </section>
+
+    <TableOfContents chapters={allChapters} />
+  </div>
+</BaseLayout>
+
+<style>
+  .hero {
+    text-align: center;
+    padding: 5rem 0 3rem;
+  }
+  .hero-ornament {
+    font-size: 1.5rem;
+    color: var(--color-chapter-num);
+    margin-bottom: 1.5rem;
+    letter-spacing: 0.5em;
+  }
+  .hero-title {
+    font-family: var(--font-serif);
+    font-size: clamp(2.5rem, 8vw, 4rem);
+    font-weight: 700;
+    color: var(--color-text);
+    margin-bottom: 1rem;
+    line-height: 1.15;
+  }
+  .hero-tagline {
+    font-family: var(--font-serif);
+    font-size: 1.25rem;
+    color: var(--color-text-muted);
+    font-style: italic;
+    line-height: 1.7;
+    margin-bottom: 1rem;
+  }
+  .hero-desc {
+    font-size: 0.95rem;
+    color: var(--color-text-subtle);
+    font-family: var(--font-sans);
+  }
+</style>

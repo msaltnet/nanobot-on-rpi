@@ -1,0 +1,69 @@
+---
+import type { CollectionEntry } from 'astro:content';
+
+interface Props {
+  prev?: CollectionEntry<'chapters'>;
+  next?: CollectionEntry<'chapters'>;
+}
+
+const { prev, next } = Astro.props;
+const base = import.meta.env.BASE_URL;
+---
+{(prev || next) && (
+  <nav class="chapter-nav" aria-label="챕터 이동">
+    <div class="nav-prev">
+      {prev && (
+        <a href={`${base}chapters/${prev.id}`} class="nav-link">
+          <span class="nav-dir">← 이전 챕터</span>
+          <span class="nav-title">Chapter {prev.data.chapterNumber}: {prev.data.title}</span>
+        </a>
+      )}
+    </div>
+    <div class="nav-next">
+      {next && (
+        <a href={`${base}chapters/${next.id}`} class="nav-link nav-link--right">
+          <span class="nav-dir">다음 챕터 →</span>
+          <span class="nav-title">Chapter {next.data.chapterNumber}: {next.data.title}</span>
+        </a>
+      )}
+    </div>
+  </nav>
+)}
+
+<style>
+  .chapter-nav {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 1rem;
+    margin-top: 4rem;
+    padding-top: 2rem;
+    border-top: 1px solid var(--color-border);
+  }
+  .nav-link {
+    display: flex;
+    flex-direction: column;
+    gap: 0.25rem;
+    padding: 1rem;
+    background: var(--color-bg-alt);
+    border: 1px solid var(--color-border);
+    border-radius: 8px;
+    text-decoration: none;
+    transition: border-color 0.15s ease;
+  }
+  .nav-link:hover { border-color: var(--color-accent); }
+  .nav-link--right { text-align: right; }
+  .nav-dir {
+    font-size: 0.75rem;
+    font-family: var(--font-sans);
+    color: var(--color-accent);
+    font-weight: 500;
+  }
+  .nav-title {
+    font-size: 0.9rem;
+    font-family: var(--font-serif);
+    color: var(--color-text-muted);
+    line-height: 1.4;
+  }
+  .nav-prev { grid-column: 1; }
+  .nav-next { grid-column: 2; }
+</style>

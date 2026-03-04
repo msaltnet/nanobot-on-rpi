@@ -1,0 +1,54 @@
+---
+const base = import.meta.env.BASE_URL;
+---
+<header class="site-header">
+  <div class="header-inner">
+    <a href={base} class="site-logo">
+      <span class="logo-icon">🤖</span>
+      <span class="logo-text">nanobot on rpi</span>
+    </a>
+    <nav>
+      <a href={base}>목차</a>
+      <a href="https://github.com/msaltnet/nanobot-on-rpi" target="_blank" rel="noopener">GitHub</a>
+    </nav>
+  </div>
+</header>
+
+<style>
+  .site-header {
+    position: sticky;
+    top: 0;
+    z-index: 100;
+    background: var(--color-bg);
+    border-bottom: 1px solid var(--color-border);
+    height: var(--nav-height);
+    display: flex;
+    align-items: center;
+  }
+  .header-inner {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    width: min(calc(var(--content-width) + 4rem), calc(100% - 4rem));
+    margin-inline: auto;
+  }
+  .site-logo {
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+    text-decoration: none;
+    font-weight: 600;
+    color: var(--color-text);
+    font-family: var(--font-serif);
+    font-size: 1.1rem;
+  }
+  .logo-icon { font-size: 1.4rem; }
+  nav { display: flex; gap: 1.5rem; }
+  nav a {
+    font-size: 0.9rem;
+    font-family: var(--font-sans);
+    color: var(--color-text-muted);
+    text-decoration: none;
+  }
+  nav a:hover { color: var(--color-accent); }
+</style>

@@ -1,0 +1,43 @@
+---
+import '../styles/global.css';
+import SiteHeader from '../components/SiteHeader.astro';
+
+interface Props {
+  title: string;
+  description?: string;
+}
+
+const { title, description = 'nanobot on rpi - 신발 상자 속 라즈베리 파이에 개인비서를 올리는 이야기' } = Astro.props;
+---
+<!DOCTYPE html>
+<html lang="ko">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta name="description" content={description} />
+    <title>{title} | nanobot on rpi</title>
+    <link rel="icon" type="image/svg+xml" href={`${import.meta.env.BASE_URL}favicon.svg`} />
+  </head>
+  <body>
+    <SiteHeader />
+    <main>
+      <slot />
+    </main>
+    <footer>
+      <div class="container">
+        <p>nanobot on rpi &mdash; 신발 상자 속 라즈베리 파이의 이야기</p>
+      </div>
+    </footer>
+  </body>
+</html>
+
+<style>
+  footer {
+    margin-top: 6rem;
+    padding: 2rem 0;
+    border-top: 1px solid var(--color-border);
+    text-align: center;
+    color: var(--color-text-subtle);
+    font-size: 0.875rem;
+  }
+</style>

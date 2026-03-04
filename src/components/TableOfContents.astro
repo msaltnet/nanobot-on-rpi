@@ -1,0 +1,38 @@
+---
+import type { CollectionEntry } from 'astro:content';
+import ChapterCard from './ChapterCard.astro';
+
+interface Props {
+  chapters: CollectionEntry<'chapters'>[];
+}
+
+const { chapters } = Astro.props;
+const sorted = [...chapters].sort((a, b) => a.data.chapterNumber - b.data.chapterNumber);
+---
+<section class="toc-section">
+  <h2 class="toc-heading">이야기 목차</h2>
+  <div class="chapter-list">
+    {sorted.map(chapter => (
+      <ChapterCard chapter={chapter} />
+    ))}
+  </div>
+</section>
+
+<style>
+  .toc-section { padding: 2rem 0 4rem; }
+  .toc-heading {
+    font-family: var(--font-serif);
+    font-size: 1.4rem;
+    color: var(--color-text-muted);
+    font-weight: 400;
+    margin-bottom: 2rem;
+    padding-bottom: 1rem;
+    border-bottom: 1px solid var(--color-border);
+    letter-spacing: 0.05em;
+  }
+  .chapter-list {
+    display: flex;
+    flex-direction: column;
+    gap: 1rem;
+  }
+</style>
