@@ -4,20 +4,20 @@ import BaseLayout from '../layouts/BaseLayout.astro';
 import TableOfContents from '../components/TableOfContents.astro';
 
 const allChapters = await getCollection('chapters', ({ data }) => !data.draft);
+const baseUrl = import.meta.env.BASE_URL;
 ---
 <BaseLayout title="홈">
   <div class="container">
     <section class="hero">
       <div class="hero-ornament">✦</div>
-      <h1 class="hero-title">nanobot on rpi</h1>
+      <h1 class="hero-title">nanobot on&nbsprpi</h1>
       <p class="hero-tagline">
-        신발 상자 속 라즈베리 파이에<br />개인비서를 올리는 이야기
+        신발&nbsp상자&nbsp속에서&nbsp잠자던 라즈베리&nbsp파이에 개인&nbsp비서를&nbsp만드는&nbsp이야기
       </p>
       <p class="hero-desc">
-        A-Z 방법과 노하우, 그리고 시행착오를 기록하는 일기장입니다.
+        A-Z&nbsp방법&nbsp및&nbsp노하우&nbsp공유. 자료&nbsp공유를&nbsp위한&nbsp저장&nbsp공간. 이야기로&nbsp기록하는&nbsp일기장.
       </p>
     </section>
-
     <TableOfContents chapters={allChapters} />
   </div>
 </BaseLayout>
@@ -48,10 +48,73 @@ const allChapters = await getCollection('chapters', ({ data }) => !data.draft);
     font-style: italic;
     line-height: 1.7;
     margin-bottom: 1rem;
+    word-break: auto-phrase;
   }
   .hero-desc {
     font-size: 0.95rem;
     color: var(--color-text-subtle);
     font-family: var(--font-sans);
+    word-break: auto-phrase;
+  }
+  .downloads {
+    display: grid;
+    gap: 1.25rem;
+    padding: 0 0 3rem;
+    margin: 0 auto 2rem;
+    max-width: 760px;
+  }
+  .downloads-eyebrow {
+    margin: 0 0 0.4rem;
+    font-size: 0.75rem;
+    letter-spacing: 0.16em;
+    text-transform: uppercase;
+    color: var(--color-chapter-num);
+  }
+  .downloads h2 {
+    margin: 0 0 0.75rem;
+    font-family: var(--font-serif);
+    font-size: clamp(1.4rem, 3vw, 2rem);
+    color: var(--color-text);
+  }
+  .downloads-desc {
+    margin: 0;
+    color: var(--color-text-muted);
+    line-height: 1.7;
+  }
+  .download-card {
+    display: grid;
+    gap: 0.35rem;
+    padding: 1.2rem 1.25rem;
+    border: 1px solid color-mix(in srgb, var(--color-chapter-num) 35%, transparent);
+    border-radius: 18px;
+    text-decoration: none;
+    background:
+      linear-gradient(135deg, color-mix(in srgb, var(--color-chapter-num) 14%, white) 0%, transparent 100%),
+      rgba(255, 255, 255, 0.72);
+    transition: transform 160ms ease, border-color 160ms ease;
+  }
+  .download-card:hover {
+    transform: translateY(-2px);
+    border-color: var(--color-chapter-num);
+  }
+  .download-label {
+    font-size: 0.78rem;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+    color: var(--color-text-subtle);
+  }
+  .download-card strong {
+    color: var(--color-text);
+    font-size: 1.05rem;
+  }
+  .download-meta {
+    color: var(--color-text-muted);
+    font-size: 0.88rem;
+  }
+  @media (min-width: 720px) {
+    .downloads {
+      grid-template-columns: 1.15fr 0.85fr;
+      align-items: end;
+    }
   }
 </style>

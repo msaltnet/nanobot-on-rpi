@@ -1,0 +1,15 @@
+nanobot on rpi sample guide
+
+This is a sample downloadable document served from GitHub Pages.
+
+Purpose
+- Verify that static files under public/ can be downloaded from the website.
+- Use this folder for PDFs, manuals, checklists, or release notes.
+
+Suggested structure
+- public/downloads/manual-v1.pdf
+- public/downloads/checklist.txt
+- public/downloads/brochure.pdf
+
+Published path
+- /downloads/sample-guide.txt

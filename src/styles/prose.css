@@ -33,13 +33,24 @@
 .prose strong { font-weight: 700; color: var(--color-accent-dark); }
 
 .prose blockquote {
-  margin: 2rem 0;
-  padding: 1rem 1.5rem;
-  background: var(--color-bg-alt);
-  border-left: 4px solid var(--color-accent);
-  border-radius: 0 8px 8px 0;
+  position: relative;
+  margin: 2.25rem 0;
+  padding: 0.2rem 0 0.2rem 2.4rem;
   font-style: italic;
   color: var(--color-text-muted);
+}
+.prose blockquote::before {
+  content: '"';
+  position: absolute;
+  left: 0;
+  top: -0.35rem;
+  font-family: var(--font-serif);
+  font-size: 3.6rem;
+  line-height: 1;
+  color: color-mix(in srgb, var(--color-accent) 70%, white);
+}
+.prose blockquote p:last-child {
+  margin-bottom: 0;
 }
 
 .prose code:not(pre code) {

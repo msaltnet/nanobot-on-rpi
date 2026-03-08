@@ -11,7 +11,7 @@ interface Props {
 }
 
 const { chapter, prevChapter, nextChapter } = Astro.props;
-const { title, subtitle, pubDate, chapterNumber } = chapter.data;
+const { title, subtitle, chapterNumber } = chapter.data;
 ---
 <BaseLayout title={title} description={subtitle}>
   <article class="container chapter-article">
@@ -19,9 +19,6 @@ const { title, subtitle, pubDate, chapterNumber } = chapter.data;
       <span class="chapter-label">Chapter {chapterNumber}</span>
       <h1 class="chapter-title">{title}</h1>
       {subtitle && <p class="chapter-subtitle">{subtitle}</p>}
-      <time datetime={pubDate.toISOString()} class="chapter-date">
-        {pubDate.toLocaleDateString('ko-KR', { year: 'numeric', month: 'long', day: 'numeric' })}
-      </time>
     </header>
 
     <div class="prose">
@@ -65,11 +62,5 @@ const { title, subtitle, pubDate, chapterNumber } = chapter.data;
     font-size: 1.1rem;
     color: var(--color-text-muted);
     font-style: italic;
-    margin-bottom: 1rem;
-  }
-  .chapter-date {
-    font-size: 0.875rem;
-    color: var(--color-text-subtle);
-    font-family: var(--font-sans);
   }
 </style>
