@@ -1,8 +1,7 @@
 import { defineConfig } from 'astro/config';
 
 export default defineConfig({
-  site: 'https://msaltnet.github.io',
-  base: '/nanobot-on-rpi/',
+  site: 'https://nanobot.msalt.net',
   markdown: {
     shikiConfig: {
       themes: {
