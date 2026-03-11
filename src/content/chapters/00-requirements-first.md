@@ -30,7 +30,7 @@ draft: false
 
 ![alt text](image.png)
 
-누군가 사용할 법한 요구사항일 것이라고 생각은 했지만, 깃헙 README Feature 예시라니...ㅋ 
+누군가 사용할 법한 요구사항일 것이라고 생각은 했지만, nanobot 깃헙 README Feature 예시라니...ㅋ 
 
 ---
 
