@@ -1,7 +1,7 @@
 ---
 chapterNumber: 3
-title: "Telegram 연결 - 봇에게 인사하기"
-subtitle: "드디어 내 폰에서 라즈베리 파이와 대화를"
+title: "Telegram 연결 - 봇과 상견례"
+subtitle: "nanobot과 대화는 했지만 이거 맞아?"
 pubDate: 2025-01-20
 tags: ["telegram", "nanobot", "봇토큰"]
 draft: false
@@ -9,116 +9,22 @@ draft: false
 
 ## 왜 Telegram인가
 
-여러 메신저 연동 방법을 고려했지만 Telegram을 선택한 이유는 간단했다.
-
 - 봇 API가 무료이고 잘 문서화되어 있다
 - 라즈베리 파이에서도 가볍게 돌아간다
 - BotFather를 통해 몇 분 만에 봇 토큰을 발급받을 수 있다
 
----
+이런 이유와 무관하게 나는 그냥 텔레그램을 좋아한다. 내가 쓴 책 [암호화폐 자동매매 시스템 만들기 with 파이썬](https://product.kyobobook.co.kr/detail/S000001624720)에도 왜 텔레그램을 사용해야 하는지 구구절절 적어놨다ㅋ
+
+내가 텔레그램을 사용한건 텔레그램에 봇 기능이 도입되기 전부터였다. 텔레그램 자체도 좋지만 봇기능은 완전 무료에 사용법도, 기술도 정말 매력적이었고, 아직까지도 더 없이 훌륭하다. 광고하나 없이 무료로 말이다. 
+
+[텔레그램telegram 봇bot 사용법 소개 및 후기](https://blog.msalt.net/112) - 많은 사람들에게 소개해주고 싶은 마음에 적은 블로그 글인데 벌써 11년이...
+
+텔레그램이 마약이나 불법 자금, 정치인들 뒷 이야기에 사용되다보니 무슨 다크웹 같은 것으로 생각하는 사람도 많은데, 애초에 푸틴한테 탄압 받아 자국을 떠난 vk메신저 창업자가 무료로 운영하고 있는 혜자 개념 프로젝트다.
 
 ## BotFather로 봇 토큰 발급
 
-Telegram에서 `@BotFather`를 검색해서 대화를 시작한다.
+토큰 받는 것이 10년 전이랑 똑같다.ㅋㅋㅋ 애초에 얼마나 설계를 잘했는지, 또 감동...API 개발 문서, 발급 시스템에 빡쳐본 경험이 있는 개발자라면 누구나 감탄할 수밖에 없다. 정식 VoC 창구하나 없지만 비전공자도 어려움 없이 사용할 수 있게 만들어 놨다.
 
-```
-/newbot
-```
-
-명령을 입력하면 봇 이름과 사용자명을 물어본다. 사용자명은 반드시 `bot`으로 끝나야 한다.
-
-설정을 마치면 봇 토큰이 발급된다. 이 토큰은 절대 외부에 공개하면 안 된다.
-
-```
-Use this token to access the HTTP API:
-1234567890:ABCdefGhIJKlmNoPQRsTUVwxyZ
-```
-
----
+너무 쉬워서 발급 절차는 적을 필요도 없음ㅋ
 
 ## nanobot에 Telegram 연결
-
-토큰을 환경 변수에 저장한다.
-
-```bash
-echo 'export TELEGRAM_BOT_TOKEN="여기에_토큰_입력"' >> ~/.bashrc
-source ~/.bashrc
-```
-
-nanobot 설정 파일을 만든다.
-
-```python
-# bot.py
-from nanobot import NanoBot
-from nanobot.integrations.telegram import TelegramIntegration
-
-bot = NanoBot()
-telegram = TelegramIntegration(token=os.environ["TELEGRAM_BOT_TOKEN"])
-bot.add_integration(telegram)
-
-@bot.on_message
-async def handle_message(message):
-    await message.reply(f"안녕하세요! 저는 nanobot입니다. 메시지를 받았어요: {message.text}")
-
-bot.run()
-```
-
-### 실행
-
-```bash
-cd ~/nanobot-assistant
-source .venv/bin/activate
-python bot.py
-```
-
----
-
-## 첫 번째 인사
-
-Telegram에서 봇을 찾아 `/start`를 보냈다. 잠시 후 답장이 왔다.
-
-> 안녕하세요! 저는 nanobot입니다. 메시지를 받았어요: /start
-
-라즈베리 파이가 내 폰에 답장을 보냈다. 신발 상자에서 꺼낸 지 얼마 되지 않은 그 작은 기기가.
-
----
-
-## systemd로 자동 실행 설정
-
-봇을 항상 켜두려면 부팅 시 자동 실행되도록 설정해야 한다.
-
-```bash
-sudo nano /etc/systemd/system/nanobot.service
-```
-
-```ini
-[Unit]
-Description=NanoBot Personal Assistant
-After=network.target
-
-[Service]
-Type=simple
-User=ubuntu
-WorkingDirectory=/home/ubuntu/nanobot-assistant
-ExecStart=/home/ubuntu/nanobot-assistant/.venv/bin/python bot.py
-Restart=on-failure
-RestartSec=10
-
-[Install]
-WantedBy=multi-user.target
-```
-
-```bash
-sudo systemctl daemon-reload
-sudo systemctl enable nanobot
-sudo systemctl start nanobot
-sudo systemctl status nanobot
-```
-
-이제 라즈베리 파이가 켜질 때마다 봇도 자동으로 실행된다.
-
----
-
-## 다음 단계
-
-봇이 살아서 대화를 나눌 수 있게 됐다. 하지만 아직 "안녕하세요" 밖에 못한다. 다음은 실용적인 기능을 붙여볼 차례다. Tavily를 연결해서 날씨를 알려주는 봇으로 업그레이드해보자.

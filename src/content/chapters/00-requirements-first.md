@@ -28,7 +28,7 @@ draft: false
 
 유튜브나 SNS에서 흔히 보이는 활용 예시를 따라가는 것보다, 내가 실제로 계속 쓰게 될 대상을 만드는 편이 더 중요하다고 생각해서 고민끝에 결정했다. 이런 토이 프로젝트는 결국 내가 왜 이걸 만드는지가 가장 큰 추진력이 되기 때문이다.
 
-![alt text](image.png)
+![nanobot github readme](image.png)
 
 누군가 사용할 법한 요구사항일 것이라고 생각은 했지만, nanobot 깃헙 README Feature 예시라니...ㅋ 
 
